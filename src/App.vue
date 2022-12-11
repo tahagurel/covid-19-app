@@ -23,7 +23,7 @@
         </option>
       </select>
     </div>
-    <table>
+    <table class="mainTable">
       <tr class="tableHeaders">
         <th scope="col">#</th>
         <th scope="col">Country</th>
@@ -31,14 +31,16 @@
         <th scope="col">Deaths</th>
         <th scope="col">Recovered</th>
       </tr>
-      <tr :key="index" v-for="(item,index) in data.Countries " class="tableItems">
-        <th scope="row">{{index}}</th>
+      <tr :key="index" v-for="(item,index) in data.Countries.slice(0,10) " class="tableItems">
+        <th scope="row">{{index+1}}</th>
         <td>{{item.Country}}</td>
         <td>{{item.TotalConfirmed}}</td>
         <td>{{item.TotalDeaths}}</td>
         <td>{{item.TotalRecovered}}</td>
       </tr>
     </table>
+    <div class="moreDetailBtn"> <button>More Detail</button></div>
+   
   </div>
 </template>
 
@@ -70,6 +72,7 @@
               if (a.Country > b.Country) {return 1;}
               return 0;
             })
+          
           })
       },
       getGlobalDatas() {
@@ -80,6 +83,7 @@
             this.confirmed = data.Global.TotalConfirmed;
             this.deaths = data.Global.TotalDeaths;
             this.recovered = data.Global.TotalRecovered;
+            
           })
       },
       getDataByCountry() {
@@ -159,5 +163,15 @@
   }
   .apiGlobalData {
     font-size: 35px;
+  }
+  .moreDetailBtn{
+    margin-top: 30px;
+    display: flex;
+    width: 70px;
+    height: 35px;
+    justify-content: center;
+  }
+  .mainTable{
+    text-align: center;
   }
 </style>
